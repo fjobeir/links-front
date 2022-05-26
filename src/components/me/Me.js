@@ -11,7 +11,17 @@ const Me = () => {
     const [links, setLinks] = useState([])
 
     useEffect(() => {
-        console.log(links)
+        const newOrder = links?.map(link => link.id)
+        fetch('http://localhost:3000/links/reorder', {
+            method: 'put',
+            headers: {
+                'authorization': 'bearer ' + appCtx.token,
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify({
+                newOrder
+            })
+        })
     }, [links])
     useEffect(() => {
         setLinks(user.Links)
