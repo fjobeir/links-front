@@ -13,7 +13,7 @@ const Signup = () => {
         const username = usernameRef.current.value
         const email = emailRef.current.value
         const password = passwordRef.current.value
-        const response = await fetch('http://localhost:3000/users/signup', {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}users/signup`, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'

@@ -12,7 +12,7 @@ const Me = () => {
 
     useEffect(() => {
         const newOrder = links?.map(link => link.id)
-        fetch('http://localhost:3000/links/reorder', {
+        fetch(`${process.env.REACT_APP_API_URL}links/reorder`, {
             method: 'put',
             headers: {
                 'authorization': 'bearer ' + appCtx.token,
@@ -25,9 +25,10 @@ const Me = () => {
     }, [links])
     useEffect(() => {
         setLinks(user.Links)
+        console.log(user)
     }, [user])
     useEffect(() => {
-        fetch('http://localhost:3000/users/me', {
+        fetch(`${process.env.REACT_APP_API_URL}users/me`, {
             headers: {
                 'Authorization': 'Bearer ' + appCtx.token
             }
@@ -61,7 +62,32 @@ const Me = () => {
     return <div className="container">
         <div className="row">
             <div className="col-12 col-lg-6 offset-lg-3">
-                <h2>Welcome {user.name}</h2>
+                <h2 className='mt-4 mb-5 text-center'>Welcome {user.name}</h2>
+                <h4 className='mt-3'>Edit your information</h4>
+                <div className='mt-3'>
+                    <label>Name</label>
+                    <input type='text' className='form-control' value={user.name} />
+                </div>
+                <div className='mt-3'>
+                    <label>Email</label>
+                    <input type='email' className='form-control' value={user.email} />
+                </div>
+                <div className='mt-3'>
+                    <label>Username</label>
+                    <input type='text' className='form-control' value={user.username} />
+                </div>
+                <div className='mt-3'>
+                    <label>Password</label>
+                    <input type='password' className='form-control' value='' />
+                </div>
+                <div className='mt-3'>
+                    <label>Password Confirmation</label>
+                    <input type='password' className='form-control' value='' />
+                </div>
+                <div className='mt-3'>
+                    <input type='button' className='btn btn-primary' value='Update' />
+                </div>
+                <h4 className='mt-3'>Reorder Your Links</h4>
                 <DndProvider backend={HTML5Backend}>
                     {links?.map((link, i) => renderLink(link, i))}
                 </DndProvider>

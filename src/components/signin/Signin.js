@@ -13,7 +13,7 @@ const Signin = () => {
     const login = () => {
         const email = emailRef.current.value
         const password = passwordRef.current.value
-        fetch('http://localhost:3000/users/signin', {
+        fetch(`${process.env.REACT_APP_API_URL}users/signin`, {
             method: 'post',
             headers: {
                 'Content-Type':'application/json'
